@@ -27,7 +27,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Pctco\\types\\": "src"
+            "Pctco\\Types\\": "src"
         }
     },
     "minimum-stability": "dev"
