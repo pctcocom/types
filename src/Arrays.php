@@ -3,7 +3,7 @@ namespace Pctco\Types;
 /**
  * 数组
  */
-class Array{
+class Arrays{
    /**
    * @name tree
    * @describe 遍历 无限子类
