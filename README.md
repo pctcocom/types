@@ -1,4 +1,14 @@
 # Types
-Types related operation packet！！
+php data type package processing!
+
+
+## Boolean
 
 ## Array
+```
+Array::tree();
+```
+
+## String
+
+## Resource
