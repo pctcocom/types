@@ -69,4 +69,25 @@ class Arrays{
       $random[$key] = self::upset($arr[$key]);
       return $random;
    }
+   /**
+   * @name Value added
+   * @describe 将数组值合并 并且相加
+   * @param mixed $arr
+   * @return Array Arrays::value_added([12=>5,13=>5],[12=>5,13=>6,14=>2]);
+   **/
+   public static function value_added($arr){
+      $all = [];
+      foreach ($arr as $va) {
+         $all = $va + $all;
+      }
+      $new = [];
+      foreach (array_keys($all) as $value) {
+         foreach ($arr as $k => $v) {
+            if (!empty($v[$value])) {
+               $new[$value] = empty($new[$value])?$v[$value]:$new[$value]+$v[$value];
+            }
+         }
+      }
+      return $new;
+   }
 }

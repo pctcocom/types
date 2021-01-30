@@ -1,6 +1,10 @@
 # Types
 php data type package processing!
 
+* https://github.com/spatie/array-to-xml
+* https://github.com/nullivex/lib-array2xml
+* https://github.com/spatie/array-functions
+* https://github.com/voku/Arrayy
 
 ## Boolean
 
@@ -29,6 +33,16 @@ Arrays::tree($arr);
 * @return Array
 **/
 Arrays::upset($arr);
+```
+
+```
+/**
+* @name Value added
+* @describe 将数组值合并 并且相加
+* @param mixed $arr
+* @return Array
+**/
+Arrays::value_added([12=>5,13=>5],[12=>5,13=>6,14=>2]);
 ```
 
 ## String
