@@ -1,6 +1,13 @@
 # Types
 php data type package processing!
 
+## Install
+```
+composer require pctco/types dev-master
+
+use Pctco\Types\Arrays
+```
+
 * https://github.com/spatie/array-to-xml
 * https://github.com/nullivex/lib-array2xml
 * https://github.com/spatie/array-functions
