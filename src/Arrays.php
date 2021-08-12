@@ -49,7 +49,7 @@ class Arrays{
       // 生成json文件
       if($jsonName){
          $json = json_encode($childs);
-         file_put_contents(ROOT_PATH.'static/json/'.$jsonName.'.json',$json);
+         file_put_contents(app()->getRootPath().'entrance/static/library/json/tree/'.$jsonName.'.json',$json);
       }
       return $childs;
    }
@@ -90,4 +90,76 @@ class Arrays{
       }
       return $new;
    }
+
+   /**
+   * @name Object To Array
+   * @describe 将对象数组转成普通数组
+   * @param mixed $oa  Object Array
+   * @return Array
+   **/
+   public static function ObjectToArray($oa){
+      $_array = is_object($oa) ? get_object_vars($oa) : $oa;
+      foreach ($_array as $key => $value) {
+         $value = (is_array($value) || is_object($value)) ? self::ObjectToArray($value) : $value;
+         $array[$key] = $value;
+      }
+      return $array;
+   }
+   /**
+   * @name Object To Array
+   * @describe 增删改查
+   * $options
+   * @param mixed $arr  Array
+   * @param mixed $tval  value 需要查找的值
+   * @param mixed $rval  value 需要替换的值
+   * @param mixed $op  add|delete|update|check (return false(没有),number(有))
+   * @param mixed $unique  true = 唯一不能重复, false = 不限制
+   * @return Array
+   **/
+   public static function ADUC($options){
+      $o = array_merge([
+         'arr'   =>   [],
+         'tval'   =>   'tval',
+         'rval'   =>   'rval',
+         'op'   =>   false,
+         'unique'   =>   true
+      ],$options);
+
+      $TvalKey = array_search($o['tval'],$o['arr']);
+
+      if ($o['op'] === 'add') {
+         if ($o['unique']) {
+            if ($TvalKey === false) $o['arr'] = array_merge($o['arr'],[$o['tval']]);
+         }else{
+            $o['arr'] = array_merge($o['arr'],[$o['tval']]);
+         }
+      }
+      if ($o['op'] === 'add::unique') {
+         if ($TvalKey === false) $o['arr'] = array_merge($o['arr'],[$o['tval']]);
+      }
+
+
+      if ($o['op'] === 'delete') {
+         if ($TvalKey !== false) unset($o['arr'][$TvalKey]);
+      }
+
+      if ($o['op'] === 'update') {
+         if ($o['unique']) {
+            $RvalKey = array_search($o['rval'],$o['arr']);
+            if ($RvalKey === false) $o['arr'][$TvalKey] = $o['rval'];
+         }else{
+            if ($TvalKey !== false) $o['arr'][$TvalKey] = $o['rval'];
+         }
+
+      }
+
+      if ($o['op'] === 'check') {
+         $o['arr'] = $key;
+      }
+
+
+      return $o['arr'];
+   }
+
+
 }
