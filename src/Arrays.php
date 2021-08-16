@@ -99,6 +99,7 @@ class Arrays{
    **/
    public static function ObjectToArray($oa){
       $_array = is_object($oa) ? get_object_vars($oa) : $oa;
+      $array = [];
       foreach ($_array as $key => $value) {
          $value = (is_array($value) || is_object($value)) ? self::ObjectToArray($value) : $value;
          $array[$key] = $value;
