@@ -29,12 +29,12 @@ class Arrays{
       foreach($arr as $key=>$val){
          if($val[$pidName] == $pid){
             if(!empty($val[$idName])){
-               $val['sub'] = self::tree($arr,$val[$idName],$idName,$pidName);
-               $subclass = $val['sub'];
+               $val['children'] = self::tree($arr,$val[$idName],$idName,$pidName);
+               $subclass = $val['children'];
                // 获取最大的array
                $val['max'] = Array_pop($subclass);
             }else{
-               $val['sub'] = [];
+               $val['children'] = [];
                $val['max'] = [];
             }
             $childs[] = $val;
@@ -52,6 +52,23 @@ class Arrays{
          file_put_contents(app()->getRootPath().'entrance/static/library/json/tree/'.$jsonName.'.json',$json);
       }
       return $childs;
+   }
+   /** 
+    ** 筛选
+    *? @date 22/03/20 20:27
+    *  @param array $data 待过滤数组
+    *  @param string $field 要查找的字段
+    *  @param $value 要查找的字段值
+    *! @return Array
+    */
+   public static function filter(array $data, string $field, $value){
+      $data = 
+      array_filter($data, function ($row) use ($field, $value) {
+         if (isset($row[$field])) {
+            return $row[$field] == $value;
+         }
+      });
+      return $data;
    }
    /**
    * @name upset
